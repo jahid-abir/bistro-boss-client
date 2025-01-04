@@ -9,6 +9,7 @@ const Navbar = () => {
         <li><NavLink to={'/'}>Home</NavLink></li>
         <li><NavLink to={'/menu'}>Menu</NavLink></li>
         <li><NavLink to={'/order/salad'}>Order</NavLink></li>
+        <li><NavLink to={'/secret'}>Secret</NavLink></li>
     </>
     return (
         <div className="navbar bg-transparent text-white container  fixed z-10">
@@ -43,7 +44,7 @@ const Navbar = () => {
             </div>
             <div className="navbar-end">
                 {
-                    user ? <><button className="btn btn-ghost" onClick={signOutUser}>Logout</button></> : <><Link to={'/login'} className="btn btn-outline text-white">Login</Link></>
+                    user ? <><div className="flex items-center gap-3"><p>{user.displayName}</p> <img className="w-8 h-8 rounded-full" src={user.photoURL} alt="" /></div> <button className="btn btn-ghost" onClick={signOutUser}>Logout</button></> : <><Link to={'/login'} className="btn btn-outline text-white">Login</Link></>
                 }
             </div>
         </div>
