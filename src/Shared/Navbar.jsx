@@ -13,7 +13,7 @@ const Navbar = () => {
         <li><NavLink to={'/menu'}>Menu</NavLink></li>
         <li><NavLink to={'/order/salad'}>Order</NavLink></li>
         <li><NavLink to={'/secret'}>Secret</NavLink></li>
-        <li><NavLink to={'/'}>
+        <li><NavLink to={'dashboard/cart'}>
             <MdShoppingCart/>
             <div className="badge badge-secondary">+{cart.length}</div>
         </NavLink></li>
