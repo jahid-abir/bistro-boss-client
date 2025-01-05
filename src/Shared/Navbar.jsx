@@ -1,15 +1,22 @@
 import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
+import { MdShoppingCart } from "react-icons/md";
+import useCart from "../hook/useCart";
 
 
 const Navbar = () => {
+    const {cart} = useCart()
     const { user, signOutUser } = useContext(AuthContext)
     const links = <>
         <li><NavLink to={'/'}>Home</NavLink></li>
         <li><NavLink to={'/menu'}>Menu</NavLink></li>
         <li><NavLink to={'/order/salad'}>Order</NavLink></li>
         <li><NavLink to={'/secret'}>Secret</NavLink></li>
+        <li><NavLink to={'/'}>
+            <MdShoppingCart/>
+            <div className="badge badge-secondary">+{cart.length}</div>
+        </NavLink></li>
     </>
     return (
         <div className="navbar bg-transparent text-white container  fixed z-10">
