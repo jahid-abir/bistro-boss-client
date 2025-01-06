@@ -6,8 +6,11 @@ import { AuthContext } from '../../Provider/AuthProvider';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Helmet } from 'react-helmet';
+import useAxiosPublic from '../../hook/useAxiosPublic';
+import SocialLogin from '../../Components/SocialLogin';
 
 const Register = () => {
+    const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()
     const { getRegisterUser,updateUserProfile,setUser} = useContext(AuthContext)
     const {
@@ -21,11 +24,17 @@ const Register = () => {
         getRegisterUser(data.email, data.password)
             .then(result => {
                 console.log(result.user)
-                toast.success('User Registration Successful.')
                 updateUserProfile({ displayName: data.name, photoURL: data.photo })
                 .then(() => {
                     navigate('/')
                     setUser(prevUser => ({ ...prevUser, displayName: data.name, photoURL: data.photo }))
+                    const userInfo = {name: data.name,email:data.email}
+                    axiosPublic.post('/users',userInfo)
+                    .then(res =>{
+                        if(res.data.acknowledged){
+                            toast.success('User Registration Successful.')
+                        }
+                    })
                 })
                 .catch(err => console.log(err))
             })
@@ -79,6 +88,7 @@ const Register = () => {
                         </div>
                         <div className="form-control mt-6">
                             <button className="btn btn-primary">Register</button>
+                            <SocialLogin/>
                         </div>
                         <p>Already have an account?<Link to={'/login'} className='text-orange-500'> Login </Link></p>
                     </form>

@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
 import toast from 'react-hot-toast';
 import { Helmet } from 'react-helmet';
+import SocialLogin from '../../Components/SocialLogin';
 
 
 const Login = () => {
@@ -80,6 +81,7 @@ const Login = () => {
                         </div>
                         <div className="form-control mt-6">
                             <button disabled={disable} className="btn btn-primary">Login</button>
+                            <SocialLogin/>
                         </div>
                         <p>New to the website?<Link to={'/register'} className='text-orange-500'> Register </Link></p>
                     </form>
