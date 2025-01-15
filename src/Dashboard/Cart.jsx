@@ -3,7 +3,7 @@ import { MdDelete } from "react-icons/md";
 import SectionTitle from "../Components/SectionTitle";
 import useCart from "../hook/useCart";
 import Swal from "sweetalert2";
-import useAxiosSecure from "../hook/useAxiosSecure";
+import useAxiosPublic from "../hook/useAxiosPublic";
 
 
 const Cart = () => {
@@ -12,7 +12,7 @@ const Cart = () => {
     for (const item of cart) {
         totalPrice += item.price
     }
-    const axiosSecure = useAxiosSecure()
+    const axiosPublic = useAxiosPublic()
     const handleDelete = id => {
         Swal.fire({
             title: "Are you sure?",
@@ -24,7 +24,7 @@ const Cart = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.delete(`/carts/${id}`)
+                axiosPublic.delete(`/carts/${id}`)
                     .then(res => {
                         if (res.data.acknowledged) {
                               Swal.fire({
